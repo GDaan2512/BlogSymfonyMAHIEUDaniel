@@ -1,0 +1,56 @@
+easy_admin:
+    site_name: 'Admin part'
+    user:
+        display_name: true
+        display_avatar: false
+    design:
+        form_theme:
+            - "@EasyAdmin/form/bootstrap_4.html.twig"
+        menu:
+            - { label: 'Topic' }
+            - { entity: 'Topic', label: 'Topic', icon: 'book' }
+            - { entity: 'Categorie', label: 'Catégorie', icon: 'tag' }
+            - { label: 'Utilisateur' }
+            - { entity: 'Utilisateur', label: 'Utilisateur', icon: 'user' }
+    formats:
+        datetime: 'd/m/Y à H:i'
+
+    entities:
+        Topic:
+            class: App\Entity\Topic
+            list:
+                fields:
+                    - id
+                    - titre
+                    - { property: 'image', label: 'Image', type: 'image', base_path: '%app.path.images%' }
+                    - { property: 'categorie.type', label: 'Catégorie', type: 'text'}
+                sort: ['titre', 'desc']
+            form:
+                fields:
+                    - titre
+                    - { property: 'texte', type: 'text', label: 'texte' }
+                    - { property: 'imageFile', type: 'vich_image', label: 'Image' }
+                    - auteur
+                    - { property: 'categorie', label: 'Catégories', type: 'entity', type_options: { class: 'App\Entity\Categorie'}}
+        Categorie:
+            class: App\Entity\Categorie
+            list:
+                fields:
+                    - type
+                    - articles
+                sort: ['type', 'asc']
+            form:
+                fields:
+                    - type
+        Utilisateur:
+            class: App\Entity\Utilisateur
+            label: 'Utilisateur'
+            list:
+                fields:
+                    - id
+                    - email
+                    - { property: 'roles', label: 'Rôles', type: json_array}
+            form:
+                fields:
+                    - email
+                    - { property: 'roles', label: 'Rôles', type: choice, type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Administrateur':'ROLE_ADMIN'}}}

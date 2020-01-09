@@ -1,0 +1,13 @@
+body {
+    padding : 1%;
+    background-color : #dddddd
+}
+
+h1 {
+    text-align : center;
+    text-decoration : underline;
+}
+
+div { 
+    padding-left : 4%;
+}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <h1>Liste des articles</h1>
+    {% for top in topic %}
+    <h3><a href="/topic/{{top.id}}">{{top.titre}}</a> ({{top.categorie.type}})</h3>
+    <div>
+        <p>{{top.texte}}</p>
+    </div>
+    {% endfor %}
+{% endblock %}

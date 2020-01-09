@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ topic.titre }}{% endblock %}
+
+{% block body %}
+    <h1>{{ topic.titre }} ({{ topic.categorie.type }})</h1>
+    <div>{{ topic.texte}}</div>
+
+    <h3>Commentaires ({{ topic.reponses|length }})</h3>
+    {% for reponse in topic.reponses %}
+        Réponse de {{ reponse.auteur.email }} : 
+        <div>{{ reponse.texte }}</div>
+        <br/>
+    {% else %}
+        <p>Il n'y a pas encore de réponse...</p>
+    {% endfor %} 
+
+    <br/>
+    <p>Commenter : </p>
+    {{ form(commentForm) }}
+{% endblock %}
